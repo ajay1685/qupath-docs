@@ -105,12 +105,12 @@ The following script applies the *he_heavy_augment* StarDist model to a brightfi
 
   // Run detection for the selected objects
   def imageData = getCurrentImageData()
-  def pathObject = getSelectedObject()
-  if (pathObject == null) {
-    Dialogs.showErrorMessage("StarDist", "Please select a parent object!")
-    return
-  }
-  stardist.detectObjects(imageData, pathObject, true)
+  def pathObjects = getSelectedObjects()
+  if (pathObjects.isEmpty()) {
+      Dialogs.showErrorMessage("StarDist", "Please select a parent object!")
+      return
+  }s
+  stardist.detectObjects(imageData, pathObjects)
   println 'Done!'
 
 .. figure:: images/stardist_nuclei_os1.jpg
@@ -205,12 +205,12 @@ Another customization is to include the probability estimates as measurements fo
 
   // Run detection for the selected objects
   def imageData = getCurrentImageData()
-  def pathObject = getSelectedObject()
-  if (pathObject == null) {
+  def pathObjects = getSelectedObjects()
+  if (pathObjects.isEmpty()) {
       Dialogs.showErrorMessage("StarDist", "Please select a parent object!")
       return
   }
-  stardist.detectObjects(imageData, pathObject, true)
+  stardist.detectObjects(imageData, pathObjects)
   println 'Done!'
   
 
@@ -287,7 +287,7 @@ These include:
 
 .. warning::
   
-  The cell expansion currently uses an elaborate, geometry-based method -- rather than the pixel-based approach in the build-in cell detection command.
+  The cell expansion currently uses an elaborate, geometry-based method -- rather than the pixel-based approach in the built-in cell detection command.
   
   This gives much smoother results independent of image resolution, but it can produce artifacts in some (hopefully rare) cases.
   
@@ -322,6 +322,7 @@ Here is an example showing more of them:
           .measureShape()              // Add shape measurements
           .measureIntensity()          // Add cell measurements (in all compartments)
           .includeProbability(true)    // Add probability as a measurement (enables later filtering)
+          .nThreads(4)                 // Limit the number of threads used for (possibly parallel) processing
           .simplify(1)                 // Control how polygons are 'simplified' to remove unnecessary vertices
           .doLog()                     // Use this to log a bit more information while running the script
           .build()
