@@ -175,23 +175,16 @@ You can change this to a fixed maximum size via the `-Xmx` Java option, e.g. to 
   [JavaOptions]
   -Xmx12G
   
-
+.. tip::
+  
+  On a Mac, you'll need to right-click on *QuPath.app* and choose :menuselection:`Show package contents`. |br|
+  The config file is inside the *Contents/app* directory.
 
 
 Can QuPath be run in batch mode from the command line?
 ======================================================
 
-Yes!
-The main priority remains the interactive application, but command line support was introduced in v0.2.0-m10.
-It will be further improved in the future.
-
-Accessing it on a Mac can be a little awkward; something like this should work (after adapting for version number):
-
-.. code-block:: bash
-
-  ./QuPath-0.2.0.app/Contents/MacOS/QuPath-0.2.0 --help
-  
-
+Yes! See :ref:`Command line`.
 
 
 Why does QuPath recommend using US English settings on startup?
@@ -209,7 +202,7 @@ Therefore QuPath does not (currently) insist on its preference for US English...
 
 There is a more detailed technical description about the issues involved `here <https://github.com/qupath/qupath/issues/29>`__.
 
-.. figure:: ../intro/images/setup_memory.jpg
+.. figure:: ../intro/images/setup_memory.png
   :class: shadow-image
   :width: 60%
   :align: center
